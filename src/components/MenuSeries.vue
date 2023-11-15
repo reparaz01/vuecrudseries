@@ -3,7 +3,7 @@
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
           <div className="container-fluid">
             <NavLink className="navbar-brand" to="/">
-              <img src= "../assets/images/logo.jpg" width="50" height="50" alt="Logo" />
+              <img src= "../assets/images/logo.png" width="50" height="50" alt="Logo" />
             </NavLink>
             <button
               className="navbar-toggler"
@@ -59,7 +59,22 @@
 </template>
 
 <script>
-    export default {
-        name: "MenuSeries"
+import ServiceSeries from './../services/ServiceSeries';
+
+export default {
+  name: "MenuSeries",
+  data() {
+    return {
+      series: []
+    };
+  },
+  methods: {
+    fetchSeries() {
+      const serviceSeries = new ServiceSeries();
+      serviceSeries.getSeries().then((result) => {
+        this.series = result;
+      });
     }
+  }
+};
 </script>
