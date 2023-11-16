@@ -14,24 +14,73 @@ export default class ServiceSeries {
         })
     }
 
-    crearCoche(coche){
+    getPersonajes() {
         return new Promise(function(resolve) {
-            var request = "api/coches/insertcoche";
+            var request = "api/Personajes";
+            var personajes = [];
+            var url = Global.urlApi + request;
+            axios.get(url).then(response => {
+                personajes = response.data;
+                resolve(personajes);
+            })
+        })
+    }
+
+    getPersonajesSerieDificil(id) {
+        return new Promise(function(resolve) {
+            const request = "api/personajes";
+            const url = Global.urlApi + request;
+          
+            axios.get(url).then(response => {
+                const personajes = response.data;
+                const personajesSerie = [];
+          
+                for (let i = 0; i < personajes.length; i++) {
+                  if (personajes[i].idSerie == id) {
+                    personajesSerie.push(personajes[i]);
+                  }
+                }
+
+                console.log(personajesSerie.length);
+
+            resolve(personajesSerie);
+          });
+        });
+      }
+
+
+    getPersonajesSerie(id) {
+        return new Promise(function(resolve) {
+            const request = "api/series/personajesserie/" + id;
+            const url = Global.urlApi + request;
+            var personajes = [];
+            axios.get(url).then(response => {
+                personajes = response.data;
+                resolve(personajes);
+          });
+        });
+      }
+      
+
+
+    crearPersonaje(personaje){
+        return new Promise(function(resolve) {
+            var request = "api/personajes";
             var url = Global.urlApiCoches + request;
-            axios.post(url, coche).then(response => {
+            axios.post(url, personaje).then(response => {
                 resolve(response);
             })
         })
     }
 
-    detallesCoche(id) {
+    detallesSerie(id) {
         return new Promise(function(resolve){
-            var request = "api/coches/findcoche/" + id;
-            var url = Global.urlApiCoches + request;
-            var coche = {};
+            var request = "api/Series/" + id;
+            var url = Global.urlApi + request;
+            var serie = {};
             axios.get(url).then(response => {
-                coche = response.data;
-                resolve(coche);
+                serie = response.data;
+                resolve(serie);
             })
         })
     }

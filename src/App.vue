@@ -1,19 +1,17 @@
 <template>
   <MenuSeries/>
-  <Home/>
   <router-view></router-view>
 </template>
 
 <script>
 import MenuSeries from './components/MenuSeries.vue';
-import Home from './components/Home.vue';
 import "bootstrap/dist/css/bootstrap.min.css"; 
 import "bootstrap/dist/js/bootstrap.bundle"; 
 
 export default {
   name: 'App',
   components: {
-    MenuSeries, Home
+    MenuSeries, 
   }
 }
 </script>
