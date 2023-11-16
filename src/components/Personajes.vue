@@ -1,6 +1,6 @@
 <template>
   <div class="container py-4">
-    <h2 class="mb-3">Personajes de la Serie: {{ $route.params.nombreSerie }} &nbsp; 
+    <h2 class="mb-3">Personajes de la Serie: {{ $route.params.nombreserie }} &nbsp; 
       <router-link :to="'/serie/' + $route.params.idserie" class="btn btn-success">
         Volver
       </router-link>

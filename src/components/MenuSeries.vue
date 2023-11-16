@@ -24,7 +24,7 @@
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link class="nav-link active" to="/nuevopersonaje">
+              <router-link class="nav-link active" to="/crearpersonaje">
                 Nuevo Personaje
               </router-link>
             </li>

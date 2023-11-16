@@ -3,7 +3,7 @@ import Home from './components/Home.vue';
 import Serie from './components/Serie.vue';
 import Personajes from './components/Personajes.vue';
 import CrearPersonaje from './components/CrearPersonaje.vue';
-
+import ModificarPersonajes from './components/ModificarPersonajes.vue';
 
 const myRoutes = [
     {
@@ -17,6 +17,9 @@ const myRoutes = [
     },
     {
         path: "/crearpersonaje", component: CrearPersonaje
+    },
+    {
+        path: "/modificarpersonajes", component: ModificarPersonajes
     }
 ]
 

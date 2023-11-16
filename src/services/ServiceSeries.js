@@ -66,7 +66,7 @@ export default class ServiceSeries {
     crearPersonaje(personaje){
         return new Promise(function(resolve) {
             var request = "api/personajes";
-            var url = Global.urlApiCoches + request;
+            var url = Global.urlApi + request;
             axios.post(url, personaje).then(response => {
                 resolve(response);
             })
@@ -85,15 +85,15 @@ export default class ServiceSeries {
         })
     }
 
-    updateCoche(coche) {
-        return new Promise(function(resolve){
-            var request = "api/coches/updatecoche";
-            var url = Global.urlApiCoches + request;
-            axios.put(url, coche).then(response =>  {
-                resolve(response);
-            })
-        })
+    updatePersonaje(idPersonaje, idSerie) {
+        return new Promise(function(resolve) {
+            const url = Global.urlApi + 'api/personajes/' + idPersonaje + "/" + idSerie;
+            axios.put(url).then(() => {
+                resolve();
+            });
+        });
     }
+    
 
     deleteCoche(id) {
         return new Promise(function(resolve){
