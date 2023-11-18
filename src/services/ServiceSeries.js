@@ -44,19 +44,21 @@ export default class ServiceSeries {
     }
 
     getSeriesSeguro() {
+      return new Promise(function(resolve) {
         const headers = {
             'Authorization': 'bearer ' + Global.token,
           };
-            var request = "api/Series";
-            var url = Global.urlApi + request;
-  
-          return axios.get(url, { headers })
-            .then(response => response.data)
-            .catch(error => {
-              console.error("Error al obtener Series:", error);
-            });
-    }
+          var request = "api/Series";
+          var series = [];
+          var url = Global.urlApi + request;
+          axios.get(url, { headers }).then(response => {
+              series = response.data;
+              resolve(series);
+          })
+        })
 
+    }
+    
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
     getPersonajes() {
@@ -72,17 +74,18 @@ export default class ServiceSeries {
     }
 
     getPersonajesSeguro() {
-        const headers = {
+        return new Promise(function(resolve) {
+          const headers = {
             'Authorization': 'bearer ' + Global.token,
           };
           var request = "api/Personajes";
+          var personajes = [];
           var url = Global.urlApi + request;
-  
-          return axios.get(url, { headers })
-            .then(response => response.data)
-            .catch(error => {
-              console.error("Error al obtener Personajes:", error);
-            });
+          axios.get(url, { headers }).then(response => {
+              personajes = response.data;
+              resolve(personajes);
+          })
+      })
 
     }
 
@@ -125,18 +128,18 @@ export default class ServiceSeries {
 
 
       getPersonajesSerieSeguro(id) {
-        const headers = {
-            'Authorization': 'bearer ' + Global.token,
-          };
-          
+          return new Promise(function(resolve) {
+            const headers = {
+              'Authorization': 'bearer ' + Global.token,
+            };
             const request = "api/series/personajesserie/" + id;
             const url = Global.urlApi + request;
-
-          return axios.get(url, { headers })
-            .then(response => response.data)
-            .catch(error => {
-              console.error("Error al obtener Personajes de la Serie:", error);
-            });
+            var personajes = [];
+            axios.get(url, { headers }).then(response => {
+                personajes = response.data;
+                resolve(personajes);
+          });
+        });
 
       }
       
@@ -153,22 +156,19 @@ export default class ServiceSeries {
     }
 
     crearPersonajeSeguro(personaje){
-
-        const headers = {
+        return new Promise(function(resolve) {
+          const headers = {
             'Authorization': 'bearer ' + Global.token,
           };
-
           var request = "api/personajes";
           var url = Global.urlApi + request;
-  
-          return axios.post(url, personaje, { headers })
-            .then(response => response.data)
-            .catch(error => {
-              console.error("Error al crear el Personaje:", error);
-            });
+          axios.post(url, personaje, { headers }).then(response => {
+              resolve(response);
+          })
+      })
 
     }
-
+ 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
 
     detallesSerie(id) {
@@ -185,19 +185,22 @@ export default class ServiceSeries {
 
 
     detallesSerieSeguro(id) {
-        const headers = {
-          'Authorization': 'bearer ' + Global.token,
-        };
-        var request = "api/Series/" + id;
-        var url = Global.urlApi + request;
+        return new Promise(function(resolve){
+          const headers = {
+            'Authorization': 'bearer ' + Global.token,
+          };
+          var request = "api/Series/" + id;
+          var url = Global.urlApi + request;
+          var serie = {};
+          axios.get(url, { headers }).then(response => {
+              serie = response.data;
+              resolve(serie);
+          })
+      })
 
-        return axios.get(url, { headers })
-          .then(response => response.data)
-          .catch(error => {
-            console.error("Error al obtener detalles de serie:", error);
-          });
-      }
+    }
 
+      
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
       
 
@@ -211,34 +214,32 @@ export default class ServiceSeries {
     }
 
     updatePersonajeSeguro(idPersonaje, idSerie) {
-        const headers = {
+        return new Promise(function(resolve) {
+          const headers = {
             'Authorization': 'bearer ' + Global.token,
           };
+          const url = Global.urlApi + 'api/personajes/' + idPersonaje + "/" + idSerie;
+          axios.put(url, { headers }).then(() => {
+              resolve();
+          });
+      });
 
-        const url = Global.urlApi + 'api/personajes/' + idPersonaje + "/" + idSerie;
-  
-          return axios.put(url, { headers })
-            .then(response => response.data)
-            .catch(error => {
-              console.error("Error al Modificar Personaje:", error);
-            });
     }
 
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - //
     
 
     deletePersonajeSeguro(id) {
+      return new Promise(function(resolve){
         const headers = {
-            'Authorization': 'bearer ' + Global.token,
-          };
-
-        const url = Global.urlApi + "api/personajes/" + id;
-  
-          return axios.delete(url, { headers })
-            .then(response => response.data)
-            .catch(error => {
-              console.error("Error al Eliminar Personaje:", error);
-            });
+          'Authorization': 'bearer ' + Global.token,
+        };
+        var request = "api/personajes/" + id;
+        var url = Global.urlApi + request;
+        axios.delete(url, { headers }).then(response =>  {
+            resolve(response);
+        })
+    })
     }
 
 }
