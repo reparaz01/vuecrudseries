@@ -47,7 +47,7 @@ export default {
     loadPersonajes() {
       const id = this.$route.params.idserie;
       
-      service.getPersonajesSerie(id).then((result) => {
+      service.getPersonajesSerieSeguro(id).then((result) => {
         this.personajes = result;
         this.personajesCargados = true;
       });

@@ -51,7 +51,7 @@ export default {
   name: "CrearPersonaje",
   methods: {
     crearPersonaje() {
-      service.crearPersonaje(this.personaje).then(result => {
+      service.crearPersonajeSeguro(this.personaje).then(result => {
         console.log(result);
         console.log(this.personaje);
         this.$router.push("/");

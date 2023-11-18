@@ -56,7 +56,7 @@ export default {
     loadSerie() {
       const id = this.$route.params.idserie;
 
-      service.detallesSerie(id).then((result) => {
+      service.detallesSerieSeguro(id).then((result) => {
         this.serie = result;
         this.serieCargada = true;
       });

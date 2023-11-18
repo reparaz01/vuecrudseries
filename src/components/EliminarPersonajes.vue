@@ -1,6 +1,6 @@
 <template>
   <div class="container py-4">
-    <h1 class="text-center fw-bold mb-4">Modificar Personaje</h1>
+    <h1 class="text-center fw-bold mb-4">Eliminar Personajes</h1>
 
     <div class="mb-3">
       <label for="personaje" class="form-label">Selecciona un Personaje:</label>
@@ -15,23 +15,11 @@
       </select>
     </div>
 
-    <div class="mb-3">
-      <label for="serie" class="form-label">Selecciona una Serie:</label>
-      <select
-        class="form-select input-narrow mx-auto"
-        id="serie"
-        v-model="selectedSerie"
-      >
-        <option v-for="serie in series" :key="serie.idSerie" :value="serie.idSerie">
-          {{ serie.nombre }}
-        </option>
-      </select>
-    </div>
 
     <div class="text-center">
       <br/>
       <button @click.prevent="modificarPersonaje" class="btn btn-primary">
-        Guardar Cambios
+        Eliminar Personaje
       </button>
       &nbsp;
       <router-link to="/" class="btn btn-secondary">Volver</router-link>
@@ -52,7 +40,7 @@ import ServiceSeries from '../services/ServiceSeries';
 const service = new ServiceSeries();
 
 export default {
-  name: "ModificarPersonajes",
+  name: "EliminarPersonajes",
   data() {
     return {
       selectedPersonaje: null,
@@ -63,10 +51,10 @@ export default {
   },
   methods: {
     modificarPersonaje() {
-    if (this.selectedPersonaje && this.selectedSerie) {
-        service.updatePersonajeSeguro(this.selectedPersonaje, this.selectedSerie)
+    if (this.selectedPersonaje) {
+        service.deletePersonajeSeguro(this.selectedPersonaje)
             .then(() => {
-                console.log("Personaje editado correctamente");
+                console.log("Personaje eliminado correctamente");
             })
             .catch(error => {
                 console.error(error);
@@ -76,14 +64,9 @@ export default {
 },
 
 
-    loadSeries() {
-        service.getSeriesSeguro().then(response => {
-      this.series = response;
-        });
-    },
 
     loadPersonajes() {
-        service.getPersonajesSeguro().then(response => {
+        service.getPersonajes().then(response => {
       this.personajes = response;
         });
     },
@@ -91,7 +74,6 @@ export default {
 
   },
   mounted() {
-    this.loadSeries();
     this.loadPersonajes();
 
 

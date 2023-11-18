@@ -24,6 +24,11 @@
               </router-link>
             </li>
             <li class="nav-item">
+              <router-link class="nav-link active" to="/login">
+                Login
+              </router-link>
+            </li>
+            <li class="nav-item">
               <router-link class="nav-link active" to="/crearpersonaje">
                 Nuevo Personaje
               </router-link>
@@ -31,6 +36,11 @@
             <li class="nav-item">
               <router-link class="nav-link active" to="/modificarpersonajes">
                 Modificar Personajes
+              </router-link>
+            </li>
+            <li class="nav-item">
+              <router-link class="nav-link active" to="/eliminarpersonajes">
+                Eliminar Personajes
               </router-link>
             </li>
             <li class="nav-item dropdown">
